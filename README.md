@@ -1,10 +1,6 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, you can run to launch the FE app:
 
 ### `yarn start`
 
@@ -29,18 +25,56 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## ✒️ Git naming convention
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+You should use commitizen to create new commit:
+`git commit` and follow further instructions
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Code Flow Branches
 
-## Learn More
+These branches which we expect to be permanently available on the repository follow the flow of code changes starting from development until the production.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Develop** (`develop`): All new _features_ and bug _fixes_ should be brought to the `develop` branch. Resolving developer codes conflicts should be done as early as here.
+- **Staging** (`staging`): CD deploys changes from `staging` branch into Staging environment. Merge `develop` branch into `staging` when bugs are fixed and complete story is finished. It shouldn't have uncompleted stories.
+- **Production** (`prod`): CD deploys changes from `prod` branch into Production environment. Merge `staging` branch into `prod` when bugs are fixed and complete story is finished. It shouldn't have uncompleted stories. We can merge hot-fixes directly to the `prod` branch in case of urgent and crucial defects. In that case you should create a new hot-fix branch from the `prod` branch.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Temporary Branches
+
+As the name implies, these are disposable branches that can be created and deleted by need of the developer or deployer.
+The name of the branch shouldn't contain more than 4 words.
+
+- **Feature** (`feat`): Any code changes for a new module or use case should be done on a feature branch. This branch is created based on the current `develop` branch. When all changes are Done, a Pull Request should be merged to the `develop` branch.
+
+  _Example_:
+
+      - feat/GIENI-1234-add-step
+
+- **Fix** (`fix`): If the code changes made from the feature branch were rejected after a release, sprint or demo, any necessary fixes after that should be done on the `fix` branch.
+
+  _Example_:
+
+      - fix/GIENI-1234-change-title-indentation
+
+- **Refactor** (`refactor`): If any code should be refactored, but the functionality shouldn't be changed and app should work as before - any necessary changes should be done on the `refactor` branch.
+
+  _Example_:
+
+      - refactor/GIENI-1234-change-steps-rendering
+
+- **Chore** (`chore`): Any code changes which is not reflected on the app. This branch is created based on the current development branch. When all changes are Done, a Pull Request should be merged to the development branch.
+
+### Code review
+
+Create a PR for every changes in the codebase.
+
+Branch can be merged ONLY after approve from reviewer. PR's author is responsible to fix any conflicts and merge the created PR.
+
+### Testing in different browsers
+
+- Open https://www.browserstack.com/question/39568 and install browserstack locally
+- Log in with your credentials
+- Select the device/browser you'd like to test
+- Type in website url http://localhost:3000
+
